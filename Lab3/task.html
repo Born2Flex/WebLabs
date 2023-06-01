@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="main.css"/>
+    <title>Laboratory2</title>
+</head>
+<body style="background-color:#dadada;">
+<main>
+
+    <section class="input-list">
+
+        <section class="product-input">
+            <input class="search-field" type="text" placeholder="   Назва товару">
+            <button class="button-add" data-tooltip="add button">Додати</button>
+        </section>
+
+        <section class="bought-product">
+
+            <label contenteditable="true">Помідори</label>
+
+            <div style="display: flex">
+                <button class="button button-red" data-tooltip="minus">–</button>
+                <label class="amount">2</label>
+                <button class="button button-green" data-tooltip="add">+</button>
+            </div>
+
+            <div class="side-buttons" style="display: flex">
+                <button class="button button-buy" data-tooltip="buy">Не куплено</button>
+                <button class="button button-remove" data-tooltip="remove"> X</button>
+            </div>
+
+        </section>
+
+        <section class="in-list-product">
+
+            <label contenteditable="true">Печиво</label>
+
+            <div style="display: flex">
+                <button class="button button-red" data-tooltip="minus">–</button>
+                <label class="amount">2</label>
+                <button class="button button-green" data-tooltip="add">+</button>
+            </div>
+
+            <div class="side-buttons">
+                <button class="button button-buy" data-tooltip="buy">Куплено</button>
+                <button class="button button-remove" data-tooltip="remove">✖</button>
+            </div>
+
+        </section>
+
+        <section class="in-list-product">
+
+            <label contenteditable="true">Сир</label>
+
+            <div style="display: flex">
+                <button class="button button-red" data-tooltip="minus">–</button>
+                <label class="amount">2</label>
+                <button class="button button-green" data-tooltip="add">+</button>
+            </div>
+
+            <div class="side-buttons">
+                <button class="button button-buy" data-tooltip="buy">Куплено</button>
+                <button class="button button-remove" data-tooltip="remove">✖</button>
+            </div>
+
+        </section>
+
+<!--        <section class="product-added">-->
+
+<!--        </section>-->
+
+    </section>
+
+    <section class="buy-list">
+
+        <section>
+            <label>Залишилося</label>
+        </section>
+
+        <section>
+            <span class="product-item">Печиво<span class="amount">2</span></span><span class="product-item">Сир<span class="amount">1</span></span></section>
+        <section>
+            <label>Куплено</label>
+        </section>
+
+        <section class="bought">
+            <span class="product-item bought">
+                Помідори
+		        <span class="amount">1</span>
+	        </span>
+        </section>
+
+
+    </section>
+
+    <section class="badge">
+        <span class="badge-text">Buy List</span>
+        <span class="author">Danylo Shlapak</span>
+    </section>
+    <script src="script.js"></script>
+</main>
+
+</body>
+</html>
