@@ -1,32 +1,8 @@
-//var id = 3;
 let productArray = ["печиво","помідори","сир"]; // помідори
 let tempNameLabel = "";
 const addField = document.querySelector(".search-field");
 const addButton = document.querySelector(".button-add");
 
-//console.log(addButton.getAttribute("data-tooltip"));
-//let minus = document.getElementsByClassName(".button-red");
-
-document.querySelectorAll('.in-list-product').forEach(function(label) {
-    label.addEventListener('focusout', function(event) {
-        const modifiedLabel = event.target;
-        let modifiedValue = modifiedLabel.textContent;
-
-       // renameProduct(modifiedLabel, modifiedValue);
-        if (modifiedValue.localeCompare(tempNameLabel)) {
-            renameProduct(modifiedLabel, modifiedValue);
-        }
-        // Perform actions with the modified label value
-        console.log('Modified Label:', modifiedValue);
-    });
-
-    label.addEventListener('click', function(event) {
-        const focusedLabel = event.target;
-        tempNameLabel = focusedLabel.textContent;
-        // Perform actions when the label receives focus
-        console.log('Focused Label:', tempNameLabel);
-    });
-});
 function renameProduct(modifiedLabel, modifiedValue) {
     let temp = [];
     for (let i = 0; i < productArray.length; i++) {
@@ -36,18 +12,16 @@ function renameProduct(modifiedLabel, modifiedValue) {
     }
     modifiedValue = modifiedValue.trim().toLowerCase();
     productArray = temp;
-    productArray.push(modifiedValue);
-    modifiedValue = modifiedValue.charAt(0).toUpperCase() + modifiedValue.slice(1) + " ";
+    productArray.push(modifiedValue); // pushing new name in array
+    modifiedValue = modifiedValue.charAt(0).toUpperCase() + modifiedValue.slice(1) + " "; // modifying name
 
-    console.log(modifiedValue + "rename");
-    let element = getStatisticElement(tempNameLabel);
-    let amount = element.children[0];
 
-    console.log(element.textContent + " TEXT CONTENT   "  + tempNameLabel);
+    let statisticElement = getStatisticElement(tempNameLabel);
+    let amount = statisticElement.children[0];
 
-    //element.textContent = element.textContent.replace(tempNameLabel, modifiedValue);
-    element.textContent = modifiedValue;
-    element.appendChild(amount);
+    modifiedLabel.textContent = modifiedValue.slice(0,-1);
+    statisticElement.textContent = modifiedValue;
+    statisticElement.appendChild(amount);
 
 }
 document.addEventListener('click', event => {
@@ -95,18 +69,12 @@ document.addEventListener('click', event => {
                 makeButtonActive(minusButton);
             }
         } else if (element.className === "button button-remove") {       // TODO REMOVE BUTTON
-            // alert("Remove working");
-        //    console.log(element.parentElement.parentElement.getAttributeNames());
-
             productArray = deleteElementFromArray(element);
 
             const name = element.parentElement.parentElement.children[0].textContent;
             const statisticElement = getStatisticElement(name);
             statisticElement.remove();
             console.log(name);
-           // let id = element.parentElement.parentElement.getAttribute("id");
-           // removeStatisticElement(id);
-        //    console.log(element.parentElement.parentElement.getAttribute("data-id") + " id found");
             element.parentElement.parentElement.remove();
 
         } else if (element.className === "button button-buy") {          // TODO BUY BUTTON
@@ -124,7 +92,6 @@ document.addEventListener('click', event => {
                 statisticElement = getStatisticElement(name);
                 statisticElement.remove();
                 document.querySelector(".buy-list").children[3].appendChild(statisticElement);
-                //section.appendChild(statisticElement);
             } else {
                 console.log(name);
                 section.classList.remove("bought-product");
@@ -138,9 +105,28 @@ document.addEventListener('click', event => {
                 // section.appendChild(statisticElement);
             }
         }
+    } else if (element.tagName === 'LABEL') {
+        const focusedLabel = event.target;
+        tempNameLabel = focusedLabel.textContent;
+        // Perform actions when the label receives focus
+        console.log('Focused Label:', tempNameLabel);
     }
 });
 
+document.addEventListener("focusout", event => {
+    let element = event.target;
+    if (element.tagName === 'LABEL') {
+
+        let modifiedValue = element.textContent;
+
+        // renameProduct(modifiedLabel, modifiedValue);
+        if (modifiedValue.localeCompare(tempNameLabel)) {
+            renameProduct(element, modifiedValue);
+        }
+        // Perform actions with the modified label value
+        console.log('Modified Label:', modifiedValue);
+    }
+})
 
 
 /**
@@ -150,8 +136,6 @@ document.addEventListener('click', event => {
  */
 function getStatisticElement(name, sectionIndex = 1) {
     const section = document.querySelector(".buy-list").children[sectionIndex];
- //   console.log(document.querySelector(".buy-list").children[1]); //.getElementById(id)    +  "found element"
-   // console.log(document.getElementById(id).querySelector(".buy-list").children); //.getElementById(id)    +  "found element"
     for (let i = 0; i < section.children.length; i++) {
         let numberLength = section.children[i].children[0].textContent.length;
         let temp = section.children[i].textContent.slice(0,-1-numberLength);   // removing last 2 chars of amount (getting a name)
