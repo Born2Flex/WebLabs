@@ -1,25 +1,72 @@
-
+//var id = 3;
 let productArray = ["печиво","помідори","сир"]; // помідори
-
+let tempNameLabel = "";
 const addField = document.querySelector(".search-field");
 const addButton = document.querySelector(".button-add");
 
-
+//console.log(addButton.getAttribute("data-tooltip"));
 //let minus = document.getElementsByClassName(".button-red");
 
+document.querySelectorAll('.in-list-product').forEach(function(label) {
+    label.addEventListener('focusout', function(event) {
+        const modifiedLabel = event.target;
+        let modifiedValue = modifiedLabel.textContent;
+
+       // renameProduct(modifiedLabel, modifiedValue);
+        if (modifiedValue.localeCompare(tempNameLabel)) {
+            renameProduct(modifiedLabel, modifiedValue);
+        }
+        // Perform actions with the modified label value
+        console.log('Modified Label:', modifiedValue);
+    });
+
+    label.addEventListener('click', function(event) {
+        const focusedLabel = event.target;
+        tempNameLabel = focusedLabel.textContent;
+        // Perform actions when the label receives focus
+        console.log('Focused Label:', tempNameLabel);
+    });
+});
+function renameProduct(modifiedLabel, modifiedValue) {
+    let temp = [];
+    for (let i = 0; i < productArray.length; i++) {
+        if (productArray[i] !== tempNameLabel.toLowerCase()) {
+            temp.push(productArray[i]);
+        }
+    }
+    modifiedValue = modifiedValue.trim().toLowerCase();
+    productArray = temp;
+    productArray.push(modifiedValue);
+    modifiedValue = modifiedValue.charAt(0).toUpperCase() + modifiedValue.slice(1) + " ";
+
+    console.log(modifiedValue + "rename");
+    let element = getStatisticElement(tempNameLabel);
+    let amount = element.children[0];
+
+    console.log(element.textContent + " TEXT CONTENT   "  + tempNameLabel);
+
+    //element.textContent = element.textContent.replace(tempNameLabel, modifiedValue);
+    element.textContent = modifiedValue;
+    element.appendChild(amount);
+
+}
 document.addEventListener('click', event => {
     let element = event.target;
 
     if (element.tagName === 'BUTTON') {
         if (element.className === "button button-red") {
-            let next = element.nextSibling;
             let text;
+            let next = element.nextSibling;
             if (next.className === "amount") {
                 text = next.textContent--;
             } else {
                 next = element.nextSibling.nextSibling;
                 text = next.textContent--;
             }
+
+            const name = element.parentElement.parentElement.children[0].textContent;
+            const statisticElement = getStatisticElement(name);
+            statisticElement.children[0].textContent = next.textContent;
 
             if (text == '2') {
                 makeButtonInactive(element);
@@ -37,35 +84,83 @@ document.addEventListener('click', event => {
                 text = next.textContent++;
             }
 
+            const name = element.parentElement.parentElement.children[0].textContent;
+            const statisticElement = getStatisticElement(name);
+            statisticElement.children[0].textContent = next.textContent;
+
             if (text == '1') {
                 if (!minusButton.classList.contains("button")) {
                     minusButton = minusButton.previousSibling.previousSibling;
                 }
                 makeButtonActive(minusButton);
             }
-        } else if (element.className === "button button-remove") {
+        } else if (element.className === "button button-remove") {       // TODO REMOVE BUTTON
             // alert("Remove working");
+        //    console.log(element.parentElement.parentElement.getAttributeNames());
 
             productArray = deleteElementFromArray(element);
+
+            const name = element.parentElement.parentElement.children[0].textContent;
+            const statisticElement = getStatisticElement(name);
+            statisticElement.remove();
+            console.log(name);
+           // let id = element.parentElement.parentElement.getAttribute("id");
+           // removeStatisticElement(id);
+        //    console.log(element.parentElement.parentElement.getAttribute("data-id") + " id found");
             element.parentElement.parentElement.remove();
-        } else if (element.className === "button button-buy") {
+
+        } else if (element.className === "button button-buy") {          // TODO BUY BUTTON
 
             let section = element.parentElement.parentElement;
-        //    console.log(element);
+
+            const name = element.parentElement.parentElement.children[0].textContent;
+            let statisticElement;
+
             if (section.classList.contains("in-list-product")) {
                 section.classList.remove("in-list-product");
                 section.classList.add("bought-product");
                 element.textContent = "Не куплено";
+
+                statisticElement = getStatisticElement(name);
+                statisticElement.remove();
+                document.querySelector(".buy-list").children[3].appendChild(statisticElement);
+                //section.appendChild(statisticElement);
             } else {
+                console.log(name);
                 section.classList.remove("bought-product");
                 section.classList.add("in-list-product");
                 element.textContent = "Куплено";
+
+                statisticElement = getStatisticElement(name,3);
+                statisticElement.remove();
+                document.querySelector(".buy-list").children[1].appendChild(statisticElement);
+                // let section = document.querySelector(".buy-list").children[1];
+                // section.appendChild(statisticElement);
             }
         }
     }
-
 });
 
+
+
+/**
+ * Remove statistic element by specified name
+ * @param name of element to remove
+ * @param sectionIndex
+ */
+function getStatisticElement(name, sectionIndex = 1) {
+    const section = document.querySelector(".buy-list").children[sectionIndex];
+ //   console.log(document.querySelector(".buy-list").children[1]); //.getElementById(id)    +  "found element"
+   // console.log(document.getElementById(id).querySelector(".buy-list").children); //.getElementById(id)    +  "found element"
+    for (let i = 0; i < section.children.length; i++) {
+        let numberLength = section.children[i].children[0].textContent.length;
+        let temp = section.children[i].textContent.slice(0,-1-numberLength);   // removing last 2 chars of amount (getting a name)
+        console.log(temp); // getting a number
+        if (temp === name) {
+            return section.children[i];
+        }
+    }
+}
 function deleteElementFromArray(element) {
     let temp = [];
     let label = element.parentElement.parentElement.children[0].textContent.toLowerCase();
@@ -92,24 +187,24 @@ function makeButtonActive(button) {
 function addStatisticElement() {
     let string = addField.value;
     string = string.trim().toLowerCase();
- //   if (!productArray.includes(string)) {
-        string = string.charAt(0).toUpperCase() + string.slice(1);
-        addField.value = "";
-        //margin-left: 5px;
-        let element = document.createElement("span");
-        //element.setAttribute("margin-left","5px");
-        element.classList.add("product-item");
 
-        element.appendChild(document.createTextNode(string));
+    string = string.charAt(0).toUpperCase() + string.slice(1) + " ";
+    addField.value = "";
+    let element = document.createElement("span");
+    //element.setAttribute("margin-left","5px");
+    element.classList.add("product-item");
 
-        let counter = document.createElement("span");
-        counter.classList.add("amount");
-        counter.appendChild(document.createTextNode("1"));
 
-        element.appendChild(counter);
+    element.appendChild(document.createTextNode(string));
 
-        document.querySelector(".buy-list").children[1].appendChild(element);
-  //  }
+    let counter = document.createElement("span");
+    counter.classList.add("amount");
+    counter.appendChild(document.createTextNode("1"));
+
+    element.appendChild(counter);
+
+    document.querySelector(".buy-list").children[1].appendChild(element);
+
 }
 
 addButton.addEventListener("click", function () {
@@ -143,18 +238,6 @@ function addProduct() {
     productArray.push(string);
     string = string.charAt(0).toUpperCase() + string.slice(1);
 
-    //let fieldContent = document.createTextNode(string.charAt(0).toUpperCase() + string.slice(1));
-
-    // if (fieldContent.length === 0) {
-    //     return;
-    // }
-
-    //if (!productArray.includes(string)) {
-    // } else {
-    //     alert("Product " + string +  " already in list!");
-    //     return;
-    // }
-
     let element = document.createElement("section");
     element.classList.add("in-list-product");
 
@@ -172,80 +255,7 @@ function addProduct() {
             </div>`;
 
     addField.focus();
-    //
-    // let label = document.createElement('label');
-    // label.setAttribute("contenteditable","true");
-    // label.appendChild(fieldContent);
-    //
-    //
-    // let midButtons = document.createElement("div");
-    // midButtons.setAttribute("style","display: flex");
-    //
-    // let minusButton = document.createElement("button");
-    // minusButton.classList.add("button");
-    // minusButton.classList.add("button-red");
-    // minusButton.classList.add("button-inactive");
-    // minusButton.setAttribute("data-tooltip","minus");
-    // minusButton.setAttribute("disabled", "");
-    // minusButton.appendChild(document.createTextNode("–"));
-    //
-    // let amountLabel = document.createElement("label");
-    // amountLabel.classList.add("amount");
-    // amountLabel.appendChild(document.createTextNode("1"));
-    //
-    // let plusButton = document.createElement("button");
-    // plusButton.classList.add("button");
-    // plusButton.classList.add("button-green");
-    // plusButton.setAttribute("data-tooltip","add");
-    // plusButton.appendChild(document.createTextNode("+"));
-    //
-    // let sideButtons = document.createElement("div");
-    // sideButtons.classList.add("side-buttons");
-    // midButtons.setAttribute("style","display: flex");
-    //
-    // let buyButton = document.createElement("button");
-    // buyButton.classList.add("button");
-    // buyButton.classList.add("button-buy");
-    // buyButton.setAttribute("data-tooltip","buy");
-    // buyButton.appendChild(document.createTextNode("Куплено"));
-    //
-    // let removeButton = document.createElement("button");
-    // removeButton.classList.add("button");
-    // removeButton.classList.add("button-remove");
-    // removeButton.setAttribute("data-tooltip","remove");
-    // removeButton.appendChild(document.createTextNode("✖"));
-    //
-    // midButtons.appendChild(minusButton);
-    // midButtons.appendChild(amountLabel);
-    // midButtons.appendChild(plusButton);
-    //
-    // sideButtons.appendChild(buyButton);
-    // sideButtons.appendChild(removeButton);
-    //
-    // element.appendChild(label);
-    // element.appendChild(midButtons);
-    // element.appendChild(sideButtons);
 
     document.body.querySelector(".input-list").appendChild(element);
 }
 
-
-
-// < section
-// className = "in-list-product" >
-//
-//     < label
-// contentEditable = "true" > Печиво < /label>
-//
-// <div style="display: flex">
-//     <button className="button button-red" data-tooltip="minus">–</button>
-//     <label className="amount">2</label>
-//     <button className="button button-green" data-tooltip="add">+</button>
-// </div>
-//
-// <div className="side-buttons">
-//     <button className="button button-buy" data-tooltip="buy">Куплено</button>
-//     <button className="button button-remove" data-tooltip="remove">✖</button>
-// </div>
-//
-// </section>
