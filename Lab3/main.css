@@ -41,8 +41,11 @@ main {
     font-weight: bold;
     font-family: var(--font-fam);
 }
-
+/*
+<!--TODO ADDED MIN-HEIGHT -->
+ */
 .buy-list section {
+    min-height: 30px;
     padding: 15px;
     border-bottom: 1px solid lightgray;
 }
