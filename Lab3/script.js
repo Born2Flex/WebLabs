@@ -118,7 +118,7 @@ function removeFromLocalstorage(name) {
 function editStatusInLocalstorage(name) {
     for (let i = 0; i < itemsArray.length; i++) {
         if (itemsArray[i].string === name) {
-               console.log("FOUND!");
+             //  console.log("FOUND!");
                itemsArray[i].isBought = !itemsArray[i].isBought;
                break;
         }
@@ -132,7 +132,7 @@ function updateNameInLocalstorage(modifiedValue) {
 
     for (let i = 0; i < itemsArray.length; i++) {
         if (itemsArray[i].string === tempNameLabel) {
-            console.log("FOUND!");
+           // console.log("FOUND!");
             itemsArray[i].string = modifiedValue;
             break;
         }
@@ -158,103 +158,121 @@ document.addEventListener('click', event => {
 
     if (element.tagName === 'BUTTON') {
         if (element.className === "button button-red") {                                                //TODO update local storage
-            let text;
-            let next = element.nextSibling;
-            if (next.className === "amount") {
-                text = next.textContent--;
-            } else {
-                next = element.nextSibling.nextSibling;
-                text = next.textContent--;
-            }
-
-            const name = element.parentElement.parentElement.children[0].textContent;
-            const statisticElement = getStatisticElement(name);
-            statisticElement.children[0].textContent = next.textContent;
-
-            updateLocalstorageAmount(name, next.textContent);
-
-            if (text == '2') {
-                makeButtonInactive(element);
-            }
-
+            minusProductAmount(element);
         } else if (element.className === "button button-green") {                                       //TODO update local storage
-            let next = element.previousSibling;
-            let minusButton = element.previousSibling.previousSibling;
-            let text;
-
-            if (next.className === "amount") {
-                text = next.textContent++;
-            } else {
-                next = element.previousSibling.previousSibling;
-                text = next.textContent++;
-            }
-
-            const name = element.parentElement.parentElement.children[0].textContent;
-            //console.log(name + "!");
-            const statisticElement = getStatisticElement(name);
-            statisticElement.children[0].textContent = next.textContent;
-
-            updateLocalstorageAmount(name, next.textContent);
-
-            if (text >= '1') {
-                if (!minusButton.classList.contains("button")) {
-                    minusButton = minusButton.previousSibling.previousSibling;
-                }
-                makeButtonActive(minusButton);
-            }
+            addProductAmount(element);
         } else if (element.className === "button button-remove") {       // TODO REMOVE BUTTON            update local storage
-            productArray = deleteElementFromArray(element);
-
-            const name = element.parentElement.parentElement.children[0].textContent;
-            const statisticElement = getStatisticElement(name);
-            statisticElement.remove();
-            console.log(name);
-
-            removeFromLocalstorage(name);
-
-            element.parentElement.parentElement.remove();
-
+            removeProduct(element);
         } else if (element.className === "button button-buy") {          // TODO BUY BUTTON               update local storage
-
-            let section = element.parentElement.parentElement;
-
-            const name = element.parentElement.parentElement.children[0].textContent;
-            let statisticElement;
-
-            editStatusInLocalstorage(name);
-
-            if (section.classList.contains("in-list-product")) {
-                section.classList.remove("in-list-product");
-                section.classList.add("bought-product");
-                element.textContent = "Не куплено";
-
-                statisticElement = getStatisticElement(name);
-                statisticElement.remove();
-                document.querySelector(".buy-list").children[3].appendChild(statisticElement);
-            } else {
-                console.log(name);
-                section.classList.remove("bought-product");
-                section.classList.add("in-list-product");
-                element.textContent = "Куплено";
-
-                statisticElement = getStatisticElement(name,3);
-                statisticElement.remove();
-                document.querySelector(".buy-list").children[1].appendChild(statisticElement);
-                // let section = document.querySelector(".buy-list").children[1];
-                // section.appendChild(statisticElement);
-            }
+            buyProduct(element);
         }
     } else if (element.tagName === 'LABEL') {
         const focusedLabel = event.target;
         tempNameLabel = focusedLabel.textContent;
         // Perform actions when the label receives focus
-        console.log('Focused Label:', tempNameLabel);
+        //console.log('Focused Label:', tempNameLabel);
     }
 });
 
+function addProductAmount(element) {
+    let next = element.previousSibling;
+    let minusButton = element.previousSibling.previousSibling;
+    let text;
+
+    if (next.className === "amount") {
+        text = next.textContent++;
+    } else {
+        next = element.previousSibling.previousSibling;
+        text = next.textContent++;
+    }
+
+    const name = element.parentElement.parentElement.children[0].textContent;
+    //console.log(name + "!");
+    const statisticElement = getStatisticElement(name);
+    statisticElement.children[0].textContent = next.textContent;
+
+    updateLocalstorageAmount(name, next.textContent);
+
+    if (text >= '1') {
+        if (!minusButton.classList.contains("button")) {
+            minusButton = minusButton.previousSibling.previousSibling;
+        }
+        makeButtonActive(minusButton);
+    }
+}
+
+function minusProductAmount(element) {
+    let text;
+    let next = element.nextSibling;
+    if (next.className === "amount") {
+        text = next.textContent--;
+    } else {
+        next = element.nextSibling.nextSibling;
+        text = next.textContent--;
+    }
+
+    const name = element.parentElement.parentElement.children[0].textContent;
+    const statisticElement = getStatisticElement(name);
+    statisticElement.children[0].textContent = next.textContent;
+
+    updateLocalstorageAmount(name, next.textContent);
+
+    if (text == '2') {
+        makeButtonInactive(element);
+    }
+
+}
+
+function buyProduct(element) {
+    let section = element.parentElement.parentElement;
+
+    const name = element.parentElement.parentElement.children[0].textContent;
+    let statisticElement;
+
+    editStatusInLocalstorage(name);
+
+    if (section.classList.contains("in-list-product")) {
+        section.classList.remove("in-list-product");
+        section.classList.add("bought-product");
+        element.textContent = "Не куплено";
+
+        statisticElement = getStatisticElement(name);
+        statisticElement.remove();
+        document.querySelector(".buy-list").children[3].appendChild(statisticElement);
+    } else {
+        console.log(name);
+        section.classList.remove("bought-product");
+        section.classList.add("in-list-product");
+        element.textContent = "Куплено";
+
+        statisticElement = getStatisticElement(name,3);
+        statisticElement.remove();
+        document.querySelector(".buy-list").children[1].appendChild(statisticElement);
+        // let section = document.querySelector(".buy-list").children[1];
+        // section.appendChild(statisticElement);
+    }
+}
+
+function removeProduct(element) {
+    productArray = deleteElementFromArray(element);
+
+    const name = element.parentElement.parentElement.children[0].textContent;
+    const statisticElement = getStatisticElement(name);
+    statisticElement.remove();
+    console.log(name);
+
+    removeFromLocalstorage(name);
+
+    element.parentElement.parentElement.remove();
+
+}
 
 document.addEventListener("focusout", event => {
     let element = event.target;
+    renameLabel(element);
+})
+
+function renameLabel(element) {
     if (element.tagName === 'LABEL') {
 
         let modifiedValue = element.textContent;
@@ -267,9 +285,7 @@ document.addEventListener("focusout", event => {
         // Perform actions with the modified label value
         console.log('Modified Label:', modifiedValue);
     }
-})
-
-
+}
 /**
  * Remove statistic element by specified name
  * @param name of element to remove
