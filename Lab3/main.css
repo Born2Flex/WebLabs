@@ -355,6 +355,7 @@ span .amount {
     position: relative;
 }
 [data-tooltip]::after {
+    z-index: 2;
     content: attr(data-tooltip);
     font-size: 0.7rem;
     position: absolute;
@@ -372,7 +373,7 @@ span .amount {
 [data-tooltip]:hover::after {
     opacity: 1;
   //  left: 1rem;
-    top: 1rem;
+    top: 1.5rem;
 }
 
 

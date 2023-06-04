@@ -240,7 +240,7 @@ function buyProduct(element) {
         statisticElement.remove();
         document.querySelector(".buy-list").children[3].appendChild(statisticElement);
     } else {
-        console.log(name);
+       // console.log(name);
         section.classList.remove("bought-product");
         section.classList.add("in-list-product");
         element.textContent = "Куплено";
@@ -259,7 +259,7 @@ function removeProduct(element) {
     const name = element.parentElement.parentElement.children[0].textContent;
     const statisticElement = getStatisticElement(name);
     statisticElement.remove();
-    console.log(name);
+   // console.log(name);
 
     removeFromLocalstorage(name);
 
@@ -283,7 +283,7 @@ function renameLabel(element) {
             updateNameInLocalstorage(modifiedValue);
         }
         // Perform actions with the modified label value
-        console.log('Modified Label:', modifiedValue);
+        //console.log('Modified Label:', modifiedValue);
     }
 }
 /**
@@ -296,7 +296,7 @@ function getStatisticElement(name, sectionIndex = 1) {
     for (let i = 0; i < section.children.length; i++) {
         let numberLength = section.children[i].children[0].textContent.length;
         let temp = section.children[i].textContent.slice(0,-1-numberLength);   // removing last 2 chars of amount (getting a name)
-        console.log(temp); // getting a number
+       // console.log(temp); // getting a number
         if (temp === name) {
             return section.children[i];
         }
@@ -305,11 +305,11 @@ function getStatisticElement(name, sectionIndex = 1) {
 function deleteElementFromArray(element) {
     let temp = [];
     let label = element.parentElement.parentElement.children[0].textContent.toLowerCase();
-    console.log(element.parentElement.parentElement.children[0].textContent);
+  //  console.log(element.parentElement.parentElement.children[0].textContent);
     for (let i = 0; i < productArray.length; i++) {
         if (productArray[i] !== label) {
             temp.push(productArray[i]);
-            console.log(productArray[i]);
+          //  console.log(productArray[i]);
         }
     }
     return temp;
