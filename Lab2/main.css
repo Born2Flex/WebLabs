@@ -353,13 +353,14 @@ span .amount {
     background: darkblue;
     color: white;
     padding: 0.5em;
-    pointer-events: none;
-    opacity: 0;
+    pointer-events: none;     /* Курсор миші реагує на підказку */
+    opacity: 0;               /* Прозорість */
     transition: 1s;
     border-radius: var(--corner-radius);
 }
 [data-tooltip]:hover::after {
     opacity: 1;
+    left: 1rem;
     top: 1rem;
 }
 

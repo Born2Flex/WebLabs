@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="uk">
+    <meta charset="UTF-8">
+    <title>My Page</title>
+
+
+    <link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+<body>
+<div class="badge">
+    <div class="title">BuyList</div>
+    <div class="createdby">Created by:</div>
+    <div class="authorname">Oleh Kurachenko</div>
+</div>
+<div class="main">
+    <div class="center">
+        <div class="left block">
+            <div class="addNew">
+                <button id="addButton" class="add tooltipOwner" data-tooltip="Додати продукт у кошик">Додати</button><div class="inputBlock"><input id="input" class="input" value="Назва товару"></div>
+            </div>
+            <div class="container">
+                <div class="product">
+                        <span>
+                            <p id="productName" class="name">SampleName</p>
+                            <input id="productNameInput" class="name">
+                        </span>
+                    <button id="removeButton" class="button remove tooltipOwner" data-tooltip="Вилучити продукт з кошику"><a class="crossIcon icons"></a></button>
+                    <button id="purchaseButton" class="button purchase tooltipOwner" data-tooltip="Позначити як куплене">
+                        Куплено
+                    </button>
+                    <div class="spacer"></div>
+                    <div class="buttons">
+                        <button id="decButton" class="button dec tooltipOwner" data-tooltip="Зменшити кількість товару"><a class="minusIcon icons"></a></button>
+                        <div id="quantity" class="leftBlockProductQuantity">1</div>
+                        <button id="incButton" class="button inc tooltipOwner" data-tooltip="Збільшити кількість товару"><a class="plusIcon icons"></a></button>
+                    </div>
+                </div>
+                <!-- Container-->
+            </div>
+        </div>
+        <div class="right block">
+            <div class="rightBlockTitle">
+                Залишилося
+            </div>
+            <div id="rActive" class="container">
+                <div class="product block">
+                    <span id="rProductName" class="rightBlockProductName">Помідори</span>
+                    <div id="rQuantity" class="rightBlockProductNumber">1</div>
+                </div>
+                <!-- multiplication-->
+            </div>
+            <div class="rightBlockTitle2">
+                Куплено
+            </div>
+            <div id="rPurchased" class="purchased container">
+                <!-- purchesed list -->
+            </div>
+        </div>
+    </div>
+</div>
+<script	type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js">	</script>
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>

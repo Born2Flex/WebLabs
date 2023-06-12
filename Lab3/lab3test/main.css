@@ -1,0 +1,422 @@
+html {
+    background-color: gainsboro;
+    min-width: 450px;
+}
+
+* {
+    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+
+.block {
+    border-radius: 4px;
+    background-color: white;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);
+}
+
+.icons {
+    font-family: Icons, serif;
+}
+
+.crossIcon:before {
+    font-size: 15px;
+    content: "✖";
+}
+
+.plusIcon:before {
+    font-size: 15px;
+    content: "➕";
+}
+
+.minusIcon:before {
+    font-size: 15px;
+    content: "➖";
+}
+
+.badge {
+    z-index: 20;
+
+    position: fixed;
+    bottom: -50px;
+    left: 20px;
+
+    background-color: darkorchid;
+    color: white;
+
+    width: 170px;
+    height: 120px;
+
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+    transition: all 1s ease;
+}
+
+.tooltipOwner {
+    position: relative;
+}
+
+.tooltipOwner::after {
+    z-index: 30;
+
+    content: attr(data-tooltip);
+    font-size: 15px;
+    font-weight: 400;
+    color: white;
+
+    display: block;
+    position: absolute;
+    visibility: hidden;
+
+    border-radius: 4px;
+    padding: 6px 2px 4px;
+    background-color: darkorchid;
+    transform: translateY(50%) scale(0.001, 0.001);
+    transition: all 0.5s ease;
+
+    opacity: 0.85;
+}
+
+.tooltipOwner:hover::after {
+    transition: all 0.5s ease;
+    transform: translateY(0px) scale(1, 1);
+    visibility: visible;
+}
+
+.badge:hover {
+    opacity: 0.5;
+    background-color: blue;
+    bottom: 0px;
+}
+
+.badge .title {
+    font-size: 32px;
+    font-weight: bold;
+    padding: 20px;
+}
+
+.badge .createdby {
+    font-size: 14px;
+    padding-left: 20px;
+}
+
+.badge .authorname {
+    font-size: 18px;
+    padding-left: 20px;
+}
+
+.main {
+    margin-top: 80px;
+    margin-left: 3%;
+    margin-right: 3%;
+    width: 94%;
+}
+
+.main .center {
+    width: 100%;
+    margin: auto;
+    max-width: 1100px;
+}
+
+.main .center .right {
+    display: inline-block;
+    width: 30%;
+    height: auto;
+}
+
+.main .center .left {
+    display: inline-block;
+    height: auto;
+    width: 68%;
+    float: left;
+    margin-right: 10px;
+}
+
+.rightBlockTitle {
+    font-size: 18px;
+    font-weight: 700;
+
+    padding: 13px;
+
+    border-bottom: 1px solid gainsboro;
+}
+
+.main .center .right .container {
+    width: auto;
+    height: auto;
+
+    padding: 13px;
+}
+
+.main .center .right .container .product {
+    background-color: #E8E8E8;
+    font-size: 10px;
+
+    width: auto;
+
+    display: inline-block;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.rightBlockProductName {
+    width: auto;
+    display: inline-block;
+}
+
+.rightBlockProductNumber {
+    background-color: coral;
+
+    font-weight: 700;
+    color: white;
+    width: auto;
+
+    display: inline-block;
+    border-radius: 10px;
+    /*height: 15px;
+    width: 15px;*/
+    padding: 3px 6px 3px 5px;
+    float: inherit;
+}
+
+.rightBlockTitle2 {
+    font-size: 18px;
+    font-weight: 700;
+
+    padding: 13px;
+
+    border-bottom: 1px solid gainsboro;
+    border-top: 1px solid gainsboro;
+}
+
+.main .center .left .addNew {
+    padding: 12px;
+//position: relative;
+}
+
+.main .center .left .addNew button.add {
+    display: block;
+    width: 100px;
+    border: 1px solid dodgerblue;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    background-color: dodgerblue;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 8px;
+
+    float: right;
+}
+
+.main .center .left .addNew button.add::after {
+    left: -15px;
+    top: -50px;
+
+    width: 130px;
+}
+
+.main .center .left .addNew input.input {
+    width: 100%;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    border: 1px solid gainsboro;
+    color: darkgray;
+
+    padding: 8px;
+}
+
+.main .center .left .addNew .inputBlock {
+    margin-right: 115px;
+}
+
+.main .center .left .container .product {
+    height: 50px;
+    background-color: white;
+    border-top: 1px solid gainsboro;
+}
+
+.main .center .left .container .product .name {
+    width: 100px;
+
+    font-size: 15px;
+    display: inline-block;
+    margin: 15px;
+}
+
+.main .center .left .container .product .buttons {
+    display: inline-block;
+
+    height: 50px;
+    width: 140px;
+
+    float: right;
+}
+
+.left .container .product .button {
+    display: inline-block;
+
+    border-radius: 4px;
+
+    margin: 7px 7px 7px 2px;
+
+    font-size: 10px;
+}
+
+.left .container .product button.purchase {
+    border: 1px solid silver;
+    background: linear-gradient(transparent,rgba(0,0,0,.05)) #F8F8F8;
+    color: rgba(0,0,0,.87);
+
+    padding: 10px 15px;
+
+    float: right;
+}
+
+.left .container .product button.purchase::after {
+    top: -50px;
+    left: -25px;
+
+    width: 120px;
+}
+
+.main .center .left .product button.remove {
+    border: 1px solid red;
+    background: red;
+    color: white;
+
+    padding: 6px 10px;
+
+    float: right;
+}
+
+.main .center .left .container .product button.remove:after {
+    left: -50px;
+    top: -50px;
+
+    width: 130px;
+}
+
+.main .center .left .container .product .spacer {
+    display: inline-block;
+
+    width: 0px;
+
+    margin: 10px 35px;
+    float: right;
+}
+
+.main .center .left .container .product button.inc {
+    border: 1px solid limegreen;
+    background: limegreen;
+    color: white;
+
+    border-radius: 15px;
+
+    padding: 6px 9px;
+}
+
+.main .center .left .container .product button.inc:after {
+    left: -50px;
+    top: -50px;
+
+    width: 130px;
+}
+
+.main .center .left .container .product button.inc:disabled {
+    background-color: green;
+    border: green;
+}
+
+.main .center .left .container .product button.dec {
+    border: 1px solid red;
+    background: red;
+    color: white;
+
+    border-radius: 15px;
+
+    padding: 6px 9px;
+//margin: 6px 9px;
+}
+
+.main .center .left .container .product button.dec:after {
+    left: -50px;
+    top: -50px;
+
+    width: 130px;
+}
+
+.main .center .left .container .product button.dec:disabled {
+    background-color: darkred;
+    border: darkred;
+}
+
+.leftBlockProductQuantity {
+    display: inline-block;
+
+    border-radius: 3px;
+
+    font-size: 14px;
+    background-color: rgb(232, 232, 232);
+    padding: 3px 9px 2px;
+}
+
+.main .center .right .purchased .product .rightBlockProductName{
+    text-decoration: line-through;
+}
+
+.main .center .right .purchased .product .rightBlockProductNumber{
+    text-decoration: line-through;
+}
+
+@media print {
+    .badge {
+        background-color: white;
+        border: 3px solid black;
+        color: black;
+
+        height: 70px;
+
+        bottom: 0px;
+    }
+
+    .badge .title {
+        visibility: hidden;
+        padding: 0px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 800px) {
+    .main .center .left .container .product .spacer {
+        margin: 10px 0px;
+    }
+}
+
+@media (max-width: 650px) {
+    .main {
+        margin-top: 20px;
+    }
+
+    .main .center .left {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .main .center .right {
+        width: 100%;
+    }
+
+    .tooltipOwner:after {
+        transform: translateY(-50%) scale(0.001, 0.001);
+    }
+
+    .main .center .left .addNew button.add:after {
+        left: -30px;
+        top: 36px;
+    }
+
+    .main .center .left .container .product button.remove:after {
+        left: -80px;
+        top: -50px;
+    }
+}
