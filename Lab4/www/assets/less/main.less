@@ -1,3 +1,250 @@
 @mainColor: blue;
 
 @import "pizza/pizza-card";
+
+:root {
+  --main-color: #fffff5;
+  --corner-radius: 6px;
+  --circle-button-rad: 50%;
+  --font-fam: Arial, serif;
+  --regular-font-size: 1.2rem;
+}
+
+body {
+  font-size: 15px;
+  background-color: var(--main-color);
+  color: #333;
+}
+
+main {
+  display: flex;
+
+//  min-width: 600px;
+}
+
+
+.main-content {
+  flex-grow: 1;
+//  min-width: 600px;
+  width: calc(100% - 300);
+  display: flex;
+  flex-direction: column;
+}
+
+.shopping-cart {
+//  align-self: flex-start;
+  background-color: #ec861c;
+  width: 300px;
+//  min-width: 300px;
+  height: 100%;
+}
+//main {
+//  display: flex;
+//  justify-content: center;
+//  flex-direction: row;
+//  margin-top: 40px;
+//}
+
+.upper_panel {
+  width: 100%;
+  height: 100px;
+ // position: fixed;
+  box-sizing: border-box;
+  background-color: #333331;
+  color: white;
+}
+
+.pizza-icon {
+  position: fixed;
+  box-sizing: border-box;
+  //padding: 50px;
+  margin-left: 10px;
+}
+.icon-text {
+  background-color: #ec861c;
+  color: white;
+}
+.icon-text .label1 {
+  box-sizing: border-box;
+  font-size: 2.7rem;
+  //padding-left: 20px;
+  //padding-top: 10px;
+  padding: 15px 20px 0;
+  margin-bottom: 0;
+}
+.icon-text .label2 {
+  box-sizing: border-box;
+  font-size: 3rem;
+  padding: 5px 25px 10px;
+  margin-bottom: -7px;
+ // margin-bottom: 0px;
+}
+
+.icon-bottom {
+  box-sizing: border-box;
+  transform: rotate(180deg);
+ // scale: 1.5;
+  background-color: rgba(0,0,0,0);
+  width: 100%;
+  //height: 1%;
+}
+.pizza-discount {
+  position: fixed;
+  box-sizing: border-box;
+  //padding: 50px;
+  margin-left: 10px;
+  bottom: 0;
+}
+.discount-text {
+  text-align: center;
+  background-color: #ec861c;
+  color: white;
+}
+
+.discount-text .label1 {
+  margin-top: -5px;
+  box-sizing: border-box;
+  font-size: 2.1rem;
+  padding: 15px 12px 0;
+}
+.discount-text .label2 {
+  box-sizing: border-box;
+  font-size: 2rem;
+  padding: 0 12px;
+}
+.discount-text .label3 {
+  box-sizing: border-box;
+  font-size: 2rem;
+  padding: 0 15px;
+}
+.discount-text .label4 {
+  box-sizing: border-box;
+  color: #dd7108;
+  font-size: 3rem;
+  padding: 0 15px;
+  margin-top: -20px;
+}
+.discount-text .label5 {
+  box-sizing: border-box;
+  font-size: 2rem;
+  padding: 0 15px;
+}
+.discount-upper {
+  box-sizing: border-box;
+  background-color: rgba(0,0,0,0);
+  width: 100%;
+}
+
+.panel_info {
+  padding-left: 160px;
+  padding-right: 25px;
+}
+
+.panel_info .upper_info {
+  display: flex;
+  justify-content: space-between;
+  height: 55%;
+  border-bottom-color: white;
+}
+
+.upper_info section {
+  margin-top: 15px;
+}
+
+.upper_info div {
+  display: inline-block;
+  margin-right: 20px;
+  color: #8f8f8f;
+}
+
+.upper_info .telephone_label {
+  font-size: 2rem;
+}
+
+.upper_info .schedule_label {
+  font-size: 1.2rem;
+}
+
+.upper_info .delivery_label {
+  font-size: 1.7rem;
+}
+
+.upper_info button {
+  box-sizing: border-box;
+  width: 90px;
+  //height: 40px;
+  font-size: 2rem;
+//  font-weight: bold;
+  border-radius: var(--corner-radius);
+  background-color: #efa11e;
+  border: none;
+  margin-top: 5px;
+  margin-bottom: -5px;
+}
+
+.panel_info .lower_info {
+  height: 45%;
+}
+
+.lower_info .pizza_label {
+  font-size: 1.7rem;
+}
+
+hr {
+  margin: 10px 0;
+}
+
+.filter-parameter {
+  //background-color: #e8e8e8;
+  display: inline-block;
+  height: 25px;
+  padding: 5px;
+  margin-left: 5px;
+  margin-top: 5px;
+  border-radius: 5px;
+ // font-size: var(--regular-font-size);
+  font-family: var(--font-fam);
+}
+
+.filter-amount {
+  background-color: #ee8900;
+  border-radius: 3px ;
+
+  display: inline-block;
+  height: 25px;
+  width: 25px;
+
+  font-family: var(--font-fam);
+
+//  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+
+  text-align: center;
+  padding-top: 4px;
+  box-sizing: border-box;
+}
+
+.filter-panel {
+  text-align: center;
+
+ // margin-top: 150px;
+}
+
+@media (max-width: 1200px) {
+  .upper_info .delivery_label {
+    display: none;
+  }
+}
+
+@media (max-width: 950px) {
+  .upper_info .schedule_label {
+    display: none;
+  }
+}
+
+@media (max-width: 750px) {
+  .upper_info .telephone_label {
+    font-size: 1.5rem;
+  }
+}
