@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
     <!-- LESS основний файл -->
-    <link rel="stylesheet/less" type="text/css" href="assets/less/main.less" />
+    <link rel="stylesheet/less" type="text/css" href="assets/less/main.less"/>
     <!-- LESS JavaScript компілятор -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js"></script>
 
@@ -17,7 +17,8 @@
 <body>
 
 <main>
-<!--    MAIN SITE PLACE-->
+    <!--    MAIN SITE PLACE-->
+
     <section class="main-content">
         <header class="upper_panel">
             <div class="panel_info">
@@ -37,7 +38,7 @@
                 </div>
                 <hr>
                 <div class="lower_info">
-                    <div class="pizza_label">
+                    <div class="pizza_label" style="display: inline-block">
                         Піца
                     </div>
                 </div>
@@ -64,18 +65,38 @@
 
         <section class="filter-panel">
             <header>
-                <h3 class="filter-parameter" id="filter">Усі піци<span class="filter-amount" id="amount_in_filter">8</span></h3>
+                <h2 class="filter-parameter" id="filter">Усі піци <span class="filter-amount"
+                                                                       id="amount_in_filter">8</span></h2>
             </header>
             <!--            BUTTONS -->
             <div>
             </div>
         </section>
+
     </section>
-<!--    SHOPPING CART PLACE-->
+    <!--    SHOPPING CART PLACE-->
     <section class="shopping-cart">
-         kooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        <div class="shopping-card-header">
+            <h4 class="filter-parameter" id="cart">Замовлення <span class="filter-amount" id="amount_in_cart">3</span></h4>
+            <button>Очистити замовлення</button>
+        </div>
+<!--        ORDERS-->
+        <div class="order-list">
+            ABC
+        </div>
+        <div class="buy-menu">
+            <div>
+                <label>Сума замовлення</label>
+                <label class="price">924 грн</label>
+            </div>
+            <button>Замовити</button>
+        </div>
     </section>
+
+    <footer>
+        <p>Pizza22 - практичний проект в межах курсу JavaScript в Києво-Могилянській Академії</p>
+        <p>Доставка піци не здійснюється</p>
+    </footer>
 </main>
 <!--<div id="cart"></div>-->
 <!--<div class="container">-->
@@ -131,7 +152,7 @@
 <!--</div>-->
 
 <!-- jQuery JavaScript -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"> </script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 
 <!--Bootsrap JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
