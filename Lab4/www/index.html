@@ -20,7 +20,8 @@
     <!--    MAIN SITE PLACE-->
 
     <section class="main-content">
-        <header class="upper_panel">
+<!--        UPPER LABEL-->
+        <header class="upper_panel" style="position: fixed; padding-right: 300px; z-index: 1">
             <div class="panel_info">
                 <div class="upper_info">
                     <section>
@@ -62,27 +63,249 @@
                 <div class="label5">-20%</div>
             </div>
         </section>
-
-        <section class="filter-panel">
+<!--        FILTERS-->
+        <section class="filter-panel" style="padding-top: 110px">
             <header>
                 <h2 class="filter-parameter" id="filter">Усі піци <span class="filter-amount"
                                                                        id="amount_in_filter">8</span></h2>
             </header>
             <!--            BUTTONS -->
-            <div>
+            <div class="filter-buttons">
+                <button id="active-filter">Усі</button>
+                <button>М'ясні</button>
+                <button>З ананасами</button>
+                <button>З грибами</button>
+                <button>З морепродуктами</button>
+                <button>Вега</button>
+
             </div>
         </section>
+<!--        PIZZA LIST-->
+        <div class="col-xs-12" style="height: 20px"></div>
+<!--        <div style="display: flex; justify-items: center">-->
+        <div style="display: flex; align-items: center; justify-content: center">
+        <section id="pizza-list">
+            <div class="col-sm-6 col-md-4 resize">
+                <div class="thumbnail pizza-card">
+                    <img src="assets/images/pizza_1.jpg">
 
+                    <div class="caption"><h3>Thumbnail label</h3>
+                        <p class="description">Meat pizza</p>
+                        <p class="content">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
+                            gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+
+                        <div class="buy-options">
+                            <div>
+                                <div class="pizza-parameter"><img src="assets/images/size-icon.svg"/>30
+                                </div>
+                                <div class="pizza-parameter"><img src="assets/images/weight.svg"/>340
+                                </div>
+                                <div class="pizza-price">
+                                    199
+                                    <p>грн.</p>
+                                </div>
+                                <button>Купити</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 resize">
+                <div class="thumbnail pizza-card">
+                    <img src="assets/images/pizza_1.jpg">
+
+                    <div class="caption"><h3>Thumbnail label</h3>
+                        <p class="description">Meat pizza</p>
+                        <p class="content">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
+                            gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+
+                        <div class="buy-options">
+                            <div>
+                                <div class="pizza-parameter"><img src="assets/images/size-icon.svg"/>30
+                                </div>
+                                <div class="pizza-parameter"><img src="assets/images/weight.svg"/>340
+                                </div>
+                                <div class="pizza-price">
+                                    199
+                                    <p>грн.</p>
+                                </div>
+                                <button>Купити</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 resize">
+                <div class="thumbnail pizza-card">
+                    <img src="assets/images/pizza_1.jpg">
+
+                    <div class="caption"><h3>Thumbnail label</h3>
+                        <p class="description">Meat pizza</p>
+                        <p class="content">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
+                            gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+
+                        <div class="buy-options">
+                            <div>
+                                <div class="pizza-parameter"><img src="assets/images/size-icon.svg"/>30
+                                </div>
+                                <div class="pizza-parameter"><img src="assets/images/weight.svg"/>340
+                                </div>
+                                <div class="pizza-price">
+                                    199
+                                    <p>грн.</p>
+                                </div>
+                                <button>Купити</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 resize">
+                <div class="thumbnail pizza-card">
+                    <img src="assets/images/pizza_1.jpg">
+
+                    <div class="caption"><h3>Thumbnail label</h3>
+                        <p class="description">Meat pizza</p>
+                        <p class="content">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
+                            gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+
+                        <div class="buy-options">
+                            <div>
+                                <div class="pizza-parameter"><img src="assets/images/size-icon.svg"/>30
+                                </div>
+                                <div class="pizza-parameter"><img src="assets/images/weight.svg"/>340
+                                </div>
+                                <div class="pizza-price">
+                                    199
+                                    <p>грн.</p>
+                                </div>
+                                <button>Купити</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        </div>
+<!--        </div>-->
+        <footer>
+            <p>Pizza22 - практичний проект в межах курсу JavaScript в Києво-Могилянській Академії</p>
+            <p>Доставка піци не здійснюється</p>
+        </footer>
     </section>
     <!--    SHOPPING CART PLACE-->
-    <section class="shopping-cart">
+    <section class="shopping-cart" style="z-index: 2">
         <div class="shopping-card-header">
             <h4 class="filter-parameter" id="cart">Замовлення <span class="filter-amount" id="amount_in_cart">3</span></h4>
             <button>Очистити замовлення</button>
         </div>
 <!--        ORDERS-->
         <div class="order-list">
-            ABC
+<!--            TODO ORDER ITEM-->
+            <div class="order-item">
+
+                <div class="item-info">
+                    <label>BBQ (Мала)
+<!--                        <div class="item-image">-->
+<!--                            <img src="assets/images/pizza_1.jpg"/>-->
+<!--                        </div>-->
+                    </label>
+                    <div>
+                        <img src="assets/images/size-icon.svg"/>30
+                        <img src="assets/images/weight.svg"/>340
+                    </div>
+                    <div>
+                        <h4>189 грн</h4>
+                        <button class="button-red">–</button>
+                        <label class="counter">4</label>
+                        <button class="button-green">+</button>
+                        <button class="remove-button">✖</button>
+                    </div>
+                </div>
+
+                <div class="item-image">
+                    <img src="assets/images/pizza_1.jpg"/>
+                </div>
+
+            </div>
+            <div class="order-item">
+
+                <div class="item-info">
+                    <label>Міксовий поло (Велика)
+<!--                        <div class="item-image">-->
+<!--                            <img src="assets/images/pizza_1.jpg"/>-->
+<!--                        </div>-->
+                    </label>
+                    <div>
+                        <img src="assets/images/size-icon.svg"/>30
+                        <img src="assets/images/weight.svg"/>340
+                    </div>
+                    <div>
+                        <h4>189 грн</h4>
+                        <button class="button-red">–</button>
+                        <label class="counter">4</label>
+                        <button class="button-green">+</button>
+                        <button class="remove-button">✖</button>
+                    </div>
+                </div>
+
+                  <div class="item-image">
+                    <img src="assets/images/pizza_1.jpg"/>
+                </div>
+
+            </div>
+            <div class="order-item">
+
+                <div class="item-info">
+                    <label>BBQ (Мала)
+                        <!--                        <div class="item-image">-->
+                        <!--                            <img src="assets/images/pizza_1.jpg"/>-->
+                        <!--                        </div>-->
+                    </label>
+                    <div>
+                        <img src="assets/images/size-icon.svg"/>30
+                        <img src="assets/images/weight.svg"/>340
+                    </div>
+                    <div>
+                        <h4>189 грн</h4>
+                        <button class="button-red">–</button>
+                        <label class="counter">4</label>
+                        <button class="button-green">+</button>
+                        <button class="remove-button">✖</button>
+                    </div>
+                </div>
+
+                <div class="item-image">
+                    <img src="assets/images/pizza_1.jpg"/>
+                </div>
+
+            </div>
+            <div class="order-item">
+
+                <div class="item-info">
+                    <label>BBQ (Мала)
+                        <!--                        <div class="item-image">-->
+                        <!--                            <img src="assets/images/pizza_1.jpg"/>-->
+                        <!--                        </div>-->
+                    </label>
+                    <div>
+                        <img src="assets/images/size-icon.svg"/>30
+                        <img src="assets/images/weight.svg"/>340
+                    </div>
+                    <div>
+                        <h4>189 грн</h4>
+                        <button class="button-red">–</button>
+                        <label class="counter">4</label>
+                        <button class="button-green">+</button>
+                        <button class="remove-button">✖</button>
+                    </div>
+                </div>
+
+                <div class="item-image">
+                    <img src="assets/images/pizza_1.jpg"/>
+                </div>
+
+            </div>
         </div>
         <div class="buy-menu">
             <div>
@@ -93,10 +316,6 @@
         </div>
     </section>
 
-    <footer>
-        <p>Pizza22 - практичний проект в межах курсу JavaScript в Києво-Могилянській Академії</p>
-        <p>Доставка піци не здійснюється</p>
-    </footer>
 </main>
 <!--<div id="cart"></div>-->
 <!--<div class="container">-->
