@@ -1,8 +1,11 @@
 import { pizza_info } from "../../../src/Pizza_List.js";
 
 const pizzaList = document.getElementById("pizza-list");
+const pizzaCart = document.getElementsByClassName("order-list")[0];
 const filterLabel = document.getElementById("filter");
-
+let displayedPizzas = [];
+let orderList = [];
+let currIndex = 0;
 console.log(pizzaList);
 console.log(pizza_info);
 pizza_info.forEach(drawPizza);
@@ -19,7 +22,7 @@ function drawPizza(pizzaData) {
                         ${pizzaData.small_size.price}
                         <p>грн.</p>
                         </div>
-                        <button>Купити</button>
+                        <button id="${currIndex}">Купити</button>
                        </div>
                     `;
     }
@@ -78,6 +81,113 @@ function getPizzaContent(pizzaContent) {
     return allContent.join(", ");
 }
 
+function drawPizzaCart(pizza) {
+    let label;
+    let size;
+    let weight;
+    let price;
+
+    if (pizza.isSmallSize) {
+        label = pizza.pizzaInfo.title + " (Мала)" ;
+        size = pizza.pizzaInfo.small_size.size ;
+        weight = pizza.pizzaInfo.small_size.weight ;
+        price = pizza.pizzaInfo.small_size.price * pizza.amount;
+    } else {
+        label = pizza.pizzaInfo.title + " (Велика)" ;
+        size = pizza.pizzaInfo.big_size.size ;
+        weight = pizza.pizzaInfo.big_size.weight ;
+        price = pizza.pizzaInfo.big_size.price * pizza.amount;
+    }
+
+    const order = `<div class="order-item">
+                    <div class="item-info">
+                        <label>${label}
+                        </label>
+                        <div>
+                            <img src="assets/images/size-icon.svg"/>${size}
+                            <img src="assets/images/weight.svg"/>${weight}
+                        </div>
+                        <div>
+                            <h4>${price} грн</h4>
+                            <button class="button-red">–</button>
+                            <label class="counter">${pizza.amount}</label>
+                            <button class="button-green">+</button>
+                            <button class="remove-button">✖</button>
+                        </div>
+                    </div>
+                    <div class="item-image">
+                        <img src="${pizza.pizzaInfo.icon}"/>
+                    </div>
+                </div>`
+
+    pizzaCart.innerHTML += order;
+}
+
+pizzaList.addEventListener("click", function (event) {
+    if (event.target.matches("button")) {
+        const pizzaName = event.target.parentElement.parentElement.parentElement.children[0].innerText;
+        const pizzaRadius = event.target.parentElement.children[0].innerText;
+        // console.log(pizzaRadius);
+        const pizzaInfo = pizza_info.find(pizza => pizza.title === pizzaName);
+        // console.log(pizzaInfo);
+        addPizzaDataToCart(pizzaInfo,pizzaRadius);
+
+    }
+})
+
+function createPizzaDataObj(pizzaInfo, pizzaRadius) {
+    let isSmallSize = false;
+    let isBigSize = false;
+    let amount = 1;
+  //  let amountBig = 0;
+
+    if (pizzaInfo.small_size !== undefined && pizzaInfo.small_size.size == pizzaRadius) {
+        isSmallSize = true;
+    }
+    // if (pizzaInfo.big_size !== undefined && pizzaInfo.big_size.size == pizzaRadius) {
+    //     isBigSize = true;
+    //     amountBig++;
+    // }
+
+    return {pizzaInfo, isSmallSize, amount};
+}
+
+function addPizzaDataToCart(pizzaInfo, pizzaRadius) {
+    const pizzaDataObj = createPizzaDataObj(pizzaInfo, pizzaRadius);
+    console.log(pizzaDataObj);
+
+    const pizzaInList = orderList.find(pizzaInfo => pizzaInfo.pizzaInfo.title === pizzaDataObj.pizzaInfo.title && pizzaInfo.isSmallSize === pizzaDataObj.isSmallSize);
+
+    // console.log(pizzaInList === undefined);
+    if (pizzaInList) {
+        // if (pizzaInList.pizzaInfo.caption === pizzaDataObj.pizzaInfo.caption) {
+        //     if (pizzaInList.isSmallSize && pizzaDataObj.isSmallSize) {
+        //         pizzaInList.amountSmall++;
+        //     } else if (pizzaInList.isBigSize && pizzaDataObj.isBigSize) {
+        //         pizzaInList.amountBig++;
+        //     } else if (pizzaInList.isSmallSize && pizzaDataObj.isBigSize) {
+        //         pizzaInList.isBigSize = true;
+        //         pizzaInList.amountBig++;
+        //     } else {
+        //         pizzaInList.isSmallSize = true;
+        //         pizzaInList.amountSmall++;
+        //     }
+        // }
+        pizzaInList.amount++;
+    } else {
+         orderList.push(pizzaDataObj);
+    }
+
+    console.log(orderList);
+    pizzaCart.innerHTML = "";
+    orderList.forEach(drawPizzaCart);
+}
+
+
+function getPizzaInfo(name) {
+    const pizzaWeight = element.closest(".pizza-parameter");
+    console.log(pizzaWeight.innerHTML);
+}
 
 document.getElementById("all-pizzas").addEventListener("click", drawAllPizza);
 document.getElementById("meat-pizza").addEventListener("click", drawMeatPizza);
