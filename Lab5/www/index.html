@@ -97,86 +97,86 @@
     <!--    SHOPPING CART PLACE-->
     <section class="shopping-cart" style="z-index: 2">
         <div class="shopping-card-header">
-            <h4 class="filter-parameter" id="cart">Замовлення <span class="filter-amount" id="amount_in_cart">3</span></h4>
-            <button>Очистити замовлення</button>
+            <h4 class="filter-parameter" id="cart">Замовлення <span class="filter-amount" id="amount_in_cart">0</span></h4>
+            <button id="clear-order-button">Очистити замовлення</button>
         </div>
 <!--        ORDERS-->
-        <div class="order-list">
+        <div id="order-list">
 <!--            TODO ORDER ITEM-->
-            <div class="order-item">
+<!--            <div class="order-item">-->
 
-                <div class="item-info">
-                    <label>BBQ (Мала)
-                    </label>
-                    <div>
-                        <img src="assets/images/size-icon.svg"/>30
-                        <img src="assets/images/weight.svg"/>460
-                    </div>
-                    <div>
-                        <h4>556 грн</h4>
-                        <button class="button-red">–</button>
-                        <label class="counter">4</label>
-                        <button class="button-green">+</button>
-                        <button class="remove-button">✖</button>
-                    </div>
-                </div>
+<!--                <div class="item-info">-->
+<!--                    <label>BBQ (Мала)-->
+<!--                    </label>-->
+<!--                    <div>-->
+<!--                        <img src="assets/images/size-icon.svg"/>30-->
+<!--                        <img src="assets/images/weight.svg"/>460-->
+<!--                    </div>-->
+<!--                    <div>-->
+<!--                        <h4>556 грн</h4>-->
+<!--                        <button class="button-red">–</button>-->
+<!--                        <label class="counter">4</label>-->
+<!--                        <button class="button-green">+</button>-->
+<!--                        <button class="remove-button">✖</button>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                <div class="item-image">
-                    <img src="assets/images/pizza_2.jpg"/>
-                </div>
+<!--                <div class="item-image">-->
+<!--                    <img src="assets/images/pizza_2.jpg"/>-->
+<!--                </div>-->
 
-            </div>
-            <div class="order-item">
+<!--            </div>-->
+<!--            <div class="order-item">-->
 
-                <div class="item-info">
-                    <label>Россо Густо (Мала)
-                    </label>
-                    <div>
-                        <img src="assets/images/size-icon.svg"/>30
-                        <img src="assets/images/weight.svg"/>400
-                    </div>
-                    <div>
-                        <h4>189 грн</h4>
-                        <button class="button-red">–</button>
-                        <label class="counter">1</label>
-                        <button class="button-green">+</button>
-                        <button class="remove-button">✖</button>
-                    </div>
-                </div>
+<!--                <div class="item-info">-->
+<!--                    <label>Россо Густо (Мала)-->
+<!--                    </label>-->
+<!--                    <div>-->
+<!--                        <img src="assets/images/size-icon.svg"/>30-->
+<!--                        <img src="assets/images/weight.svg"/>400-->
+<!--                    </div>-->
+<!--                    <div>-->
+<!--                        <h4>189 грн</h4>-->
+<!--                        <button class="button-red">–</button>-->
+<!--                        <label class="counter">1</label>-->
+<!--                        <button class="button-green">+</button>-->
+<!--                        <button class="remove-button">✖</button>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                <div class="item-image">
-                    <img src="assets/images/pizza_4.jpg"/>
-                </div>
+<!--                <div class="item-image">-->
+<!--                    <img src="assets/images/pizza_4.jpg"/>-->
+<!--                </div>-->
 
-            </div>
-            <div class="order-item">
+<!--            </div>-->
+<!--            <div class="order-item">-->
 
-                <div class="item-info">
-                    <label>Міксовий поло (Велика)
-                    </label>
-                    <div>
-                        <img src="assets/images/size-icon.svg"/>40
-                        <img src="assets/images/weight.svg"/>780
-                    </div>
-                    <div>
-                        <h4>179 грн</h4>
-                        <button class="button-red">–</button>
-                        <label class="counter">1</label>
-                        <button class="button-green">+</button>
-                        <button class="remove-button">✖</button>
-                    </div>
-                </div>
+<!--                <div class="item-info">-->
+<!--                    <label>Міксовий поло (Велика)-->
+<!--                    </label>-->
+<!--                    <div>-->
+<!--                        <img src="assets/images/size-icon.svg"/>40-->
+<!--                        <img src="assets/images/weight.svg"/>780-->
+<!--                    </div>-->
+<!--                    <div>-->
+<!--                        <h4>179 грн</h4>-->
+<!--                        <button class="button-red">–</button>-->
+<!--                        <label class="counter">1</label>-->
+<!--                        <button class="button-green">+</button>-->
+<!--                        <button class="remove-button">✖</button>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                <div class="item-image">
-                    <img src="assets/images/pizza_1.jpg"/>
-                </div>
+<!--                <div class="item-image">-->
+<!--                    <img src="assets/images/pizza_1.jpg"/>-->
+<!--                </div>-->
 
-            </div>
+<!--            </div>-->
         </div>
         <div class="buy-menu">
             <div>
                 <label>Сума замовлення</label>
-                <label class="price">924 грн</label>
+                <label id="price">0 грн</label>
             </div>
             <button>Замовити</button>
         </div>

@@ -1,14 +1,23 @@
 import { pizza_info } from "../../../src/Pizza_List.js";
 
 const pizzaList = document.getElementById("pizza-list");
-const pizzaCart = document.getElementsByClassName("order-list")[0];
+const pizzaCart = document.getElementById("order-list");
+const orderCounter = document.getElementById("amount_in_cart");
+const orderPrice = document.getElementById("price");
 const filterLabel = document.getElementById("filter");
-let displayedPizzas = [];
-let orderList = [];
-let currIndex = 0;
-console.log(pizzaList);
-console.log(pizza_info);
+const clearOrderButton = document.getElementById("clear-order-button");
+
+//localStorage.setItem("order",JSON.stringify([]));
+let orderList = localStorage.getItem("order") ? JSON.parse(localStorage.getItem("order")) : [];
+//let currIndex = 0;
+// console.log(pizzaList);
+// console.log(pizza_info);
+
 pizza_info.forEach(drawPizza);
+
+orderList.forEach(drawPizzaCart);
+updateOrderPrice();
+orderCounter.innerText = orderList.length;
 function drawPizza(pizzaData) {
     let buyOptions = ``;
 
@@ -22,7 +31,7 @@ function drawPizza(pizzaData) {
                         ${pizzaData.small_size.price}
                         <p>грн.</p>
                         </div>
-                        <button id="${currIndex}">Купити</button>
+                        <button>Купити</button>
                        </div>
                     `;
     }
@@ -76,8 +85,7 @@ function drawPizza(pizzaData) {
 
 function getPizzaContent(pizzaContent) {
     let allContent = [].concat(...Object.values(pizzaContent));
-
-    console.log(allContent);
+//    console.log(allContent);
     return allContent.join(", ");
 }
 
@@ -131,62 +139,93 @@ pizzaList.addEventListener("click", function (event) {
         const pizzaInfo = pizza_info.find(pizza => pizza.title === pizzaName);
         // console.log(pizzaInfo);
         addPizzaDataToCart(pizzaInfo,pizzaRadius);
-
     }
-})
+});
 
+pizzaCart.addEventListener("click", function (event) {
+   let pizzaName = event.target.parentElement.parentElement.children[0].innerText;
+//   console.log(pizzaName);
+   const isSmall = pizzaName.includes(" (Мала)");
+   if (isSmall) {
+       pizzaName = pizzaName.substring(0, pizzaName.length - 7);
+   } else {
+       pizzaName = pizzaName.substring(0, pizzaName.length - 9);
+   }
+ //  const pizza = orderList.find(pizza => pizza.pizzaInfo.title === pizzaName && pizza.isSmallSize === isSmall);
+    let i;
+    let pizza;
+    for (i = 0; i < orderList.length; i++) {
+        if (orderList[i].pizzaInfo.title === pizzaName && orderList[i].isSmallSize === isSmall) {
+            pizza = orderList[i];
+            break;
+        }
+    }
+
+   if (event.target.classList.contains("button-red")) {
+       pizza.amount--;
+       if (pizza.amount === 0) {
+           orderList.splice(i,1);
+       }
+   } else if (event.target.classList.contains("button-green")) {
+       pizza.amount++;
+   } else if (event.target.classList.contains("remove-button")) {
+       orderList.splice(i,1);
+   }
+   // console.log(i);
+   // console.log(orderList);
+
+   localStorage.setItem("order", JSON.stringify(orderList));
+   pizzaCart.innerHTML = "";
+   orderCounter.innerText = orderList.length;
+   updateOrderPrice();
+   orderList.forEach(drawPizzaCart);
+   //console.log(pizzaName);
+});
+clearOrderButton.addEventListener("click",function (event) {
+    pizzaCart.innerHTML = "";
+    orderList = [];
+    orderCounter.innerText = '0';
+    orderPrice.innerText = 0 + " грн";
+    localStorage.setItem("order", JSON.stringify(orderList));
+});
+
+function updateOrderPrice() {
+    let amount = 0;
+    for (const pizza of orderList) {
+        if (pizza.isSmallSize) {
+            amount += pizza.pizzaInfo.small_size.price * pizza.amount;
+        } else {
+            amount += pizza.pizzaInfo.big_size.price * pizza.amount;
+        }
+    }
+    orderPrice.innerText = amount + " грн";
+}
 function createPizzaDataObj(pizzaInfo, pizzaRadius) {
     let isSmallSize = false;
-    let isBigSize = false;
     let amount = 1;
-  //  let amountBig = 0;
 
     if (pizzaInfo.small_size !== undefined && pizzaInfo.small_size.size == pizzaRadius) {
         isSmallSize = true;
     }
-    // if (pizzaInfo.big_size !== undefined && pizzaInfo.big_size.size == pizzaRadius) {
-    //     isBigSize = true;
-    //     amountBig++;
-    // }
 
     return {pizzaInfo, isSmallSize, amount};
 }
-
 function addPizzaDataToCart(pizzaInfo, pizzaRadius) {
     const pizzaDataObj = createPizzaDataObj(pizzaInfo, pizzaRadius);
-    console.log(pizzaDataObj);
-
+   // console.log(pizzaDataObj);
     const pizzaInList = orderList.find(pizzaInfo => pizzaInfo.pizzaInfo.title === pizzaDataObj.pizzaInfo.title && pizzaInfo.isSmallSize === pizzaDataObj.isSmallSize);
 
-    // console.log(pizzaInList === undefined);
     if (pizzaInList) {
-        // if (pizzaInList.pizzaInfo.caption === pizzaDataObj.pizzaInfo.caption) {
-        //     if (pizzaInList.isSmallSize && pizzaDataObj.isSmallSize) {
-        //         pizzaInList.amountSmall++;
-        //     } else if (pizzaInList.isBigSize && pizzaDataObj.isBigSize) {
-        //         pizzaInList.amountBig++;
-        //     } else if (pizzaInList.isSmallSize && pizzaDataObj.isBigSize) {
-        //         pizzaInList.isBigSize = true;
-        //         pizzaInList.amountBig++;
-        //     } else {
-        //         pizzaInList.isSmallSize = true;
-        //         pizzaInList.amountSmall++;
-        //     }
-        // }
         pizzaInList.amount++;
     } else {
-         orderList.push(pizzaDataObj);
+        orderList.push(pizzaDataObj);
     }
-
-    console.log(orderList);
+//    console.log(orderList);
+    localStorage.setItem("order", JSON.stringify(orderList));
     pizzaCart.innerHTML = "";
+    orderCounter.innerText = orderList.length;
+    updateOrderPrice();
     orderList.forEach(drawPizzaCart);
-}
-
-
-function getPizzaInfo(name) {
-    const pizzaWeight = element.closest(".pizza-parameter");
-    console.log(pizzaWeight.innerHTML);
 }
 
 document.getElementById("all-pizzas").addEventListener("click", drawAllPizza);
